@@ -24,8 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('is-open', open);
         }
 
-        navToggle.addEventListener('click', () => {
+        const toggleMenu = () => {
             setMenuOpen(navToggle.getAttribute('aria-expanded') !== 'true');
+        };
+
+        // Touch pointerup arrives before the browser's synthesized click.
+        let lastTouchToggle = -Infinity;
+        navToggle.addEventListener('pointerup', event => {
+            if (event.pointerType !== 'touch') return;
+            lastTouchToggle = performance.now();
+            toggleMenu();
+        });
+
+        navToggle.addEventListener('click', event => {
+            // Keep the click path for mouse and keyboard without toggling twice on touch.
+            if (event.detail !== 0 && performance.now() - lastTouchToggle < 1000) return;
+            toggleMenu();
         });
 
         navMenu.addEventListener('click', event => {

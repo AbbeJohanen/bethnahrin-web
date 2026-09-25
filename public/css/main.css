@@ -912,17 +912,22 @@ h1, h2, h3 {
         background: #fff;
         color: var(--color-text-main);
         cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
         transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
     }
 
-    .nav-toggle:hover,
     .nav-toggle[aria-expanded="true"] {
         border-color: rgba(234, 88, 12, 0.3);
         background: #fff7ed;
     }
 
-    .nav-toggle:hover {
-        transform: translateY(-2px);
+    @media (hover: hover) and (pointer: fine) {
+        .nav-toggle:hover {
+            border-color: rgba(234, 88, 12, 0.3);
+            background: #fff7ed;
+            transform: translateY(-2px);
+        }
     }
 
     .nav-toggle span {
