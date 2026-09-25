@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/main.min.css?v=20260925-responsive">
+    <link rel="stylesheet" href="/css/main.min.css?v=20260925-projects">
 </head>
 <body>
 
@@ -43,10 +43,13 @@
                 <img src="/assets/logo.jpeg" alt="Kooperativet Beth-Nahrin Logo">
             </a>
 
-            <nav class="nav-menu">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="site-nav-menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="site-nav-menu" class="nav-menu" aria-label="Main navigation">
                 <ul role="list">
-                    <li class="hide-on-mobile"><a href="#hero" class="nav-link active">Home</a></li>
                     <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#contact" class="nav-link btn btn-primary">Contact</a></li>
                 </ul>
             </nav>
@@ -80,6 +83,7 @@
                 <div class="section-header reveal-item">
                     <h2 class="section-title">About Us</h2>
                     <p class="section-desc">Kooperativet Beth-Nahrin develops digital solutions that strengthen culture, education, and community engagement. Our current projects focus on language accessibility, but our mission extends to creating modern tools that support learning, connection, and cultural continuity in the digital era.</p>
+                    <a class="projects-discovery-link" href="#projects">See what we're building <span aria-hidden="true">→</span></a>
                 </div>
 
                 <div class="cards-grid">
@@ -98,6 +102,38 @@
                         <p class="card-text">To create a digital ecosystem where endangered knowledge, languages, and cultural expressions can thrive, not only preserved, but revitalized for future generations through engaging, user-friendly technologies.</p>
                     </article>
                 </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section" aria-labelledby="projects-title">
+            <div class="container">
+                <div class="projects-intro reveal-item">
+                    <span class="projects-eyebrow">What we're building</span>
+                    <h2 id="projects-title" class="section-title">Our Projects</h2>
+                    <p>Digital tools that help language and culture stay part of everyday life.</p>
+                </div>
+
+                <article class="project-feature reveal-item delay-100" aria-labelledby="darbo-title">
+                    <div class="project-copy">
+                        <span class="project-kind">Mobile app · Language learning</span>
+                        <h3 id="darbo-title" class="project-name">Darbo</h3>
+                        <p class="project-tagline">Learn Assyrian/Aramaic through play.</p>
+                        <p class="project-description">Explore words through games, pictures, and pronunciation. Darbo makes language learning approachable for children, families, and anyone curious to learn.</p>
+                        <p class="project-detail">400+ words to discover</p>
+                        <div class="store-links" aria-label="Download Darbo">
+                            <a class="store-link store-link--apple" href="https://apple.co/4yeR9yf" target="_blank" rel="noopener noreferrer" aria-label="Download Darbo on the App Store">
+                                <img src="/assets/app-store-badge.svg" alt="Download on the App Store" width="120" height="40">
+                            </a>
+                            <a class="store-link store-link--google" href="https://play.google.com/store/apps/details?id=com.bethnahrin.darbo" target="_blank" rel="noopener noreferrer" aria-label="Get Darbo on Google Play">
+                                <img src="/assets/google-play-badge.svg" alt="Get it on Google Play" width="135" height="40">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-art">
+                        <img class="project-icon float-animation" src="/assets/darbo_icon.png" alt="Darbo app icon" width="290" height="290" loading="lazy">
+                    </div>
+                </article>
             </div>
         </section>
 
@@ -139,6 +175,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="/js/main.min.js"></script>
+    <script src="/js/main.min.js?v=20260925-projects"></script>
 </body>
 </html>

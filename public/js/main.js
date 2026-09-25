@@ -13,6 +13,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('scroll', handleScroll);
 
+    // Compact navigation on narrow screens
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.getElementById('site-nav-menu');
+
+    if (navToggle && navMenu) {
+        function setMenuOpen(open) {
+            navToggle.setAttribute('aria-expanded', String(open));
+            navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            navMenu.classList.toggle('is-open', open);
+        }
+
+        navToggle.addEventListener('click', () => {
+            setMenuOpen(navToggle.getAttribute('aria-expanded') !== 'true');
+        });
+
+        navMenu.addEventListener('click', event => {
+            if (event.target.closest('a')) setMenuOpen(false);
+        });
+
+        document.addEventListener('pointerdown', event => {
+            if (!event.target.closest('.nav-container')) setMenuOpen(false);
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+                setMenuOpen(false);
+                navToggle.focus();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 700) setMenuOpen(false);
+        });
+    }
+
 
     // 2. Active Link Highlighting (ScrollSpy)
     const sections = document.querySelectorAll('section');
@@ -20,28 +55,30 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function highlightLink() {
         let scrollPosition = window.scrollY + 150; 
+        let activeLink = null;
 
         // Logic to force last link active if at bottom of page
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
-            navLinks.forEach(l => l.classList.remove('active'));
-            const lastLink = navLinks[navLinks.length - 1];
-            if (lastLink) lastLink.classList.add('active');
-            return;
+            activeLink = navLinks[navLinks.length - 1];
+        } else {
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const id = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                }
+            });
         }
 
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const id = section.getAttribute('id');
-            const link = document.querySelector(`.nav-link[href="#${id}"]`);
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(l => l.classList.remove('active'));
-                if (link) link.classList.add('active');
-            }
-        });
+        navLinks.forEach(link => link.classList.toggle('active', link === activeLink));
     }
     window.addEventListener('scroll', highlightLink);
+    window.addEventListener('load', () => {
+        handleScroll();
+        highlightLink();
+    });
 
 
     // 3. Intersection Observer (Reveal on Scroll)
