@@ -190,7 +190,7 @@ h1, h2, h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 90%;
 }
 
 .nav-logo {
@@ -225,6 +225,7 @@ h1, h2, h3 {
 
 .nav-link {
     font-weight: 600;
+    white-space: nowrap;
     position: relative;
     font-size: 1.05rem;
     line-height: normal;
@@ -586,22 +587,30 @@ h1, h2, h3 {
         text-align: center;
         gap: 3rem;
     }
-    
-    .hero-actions {
-        justify-content: center;
+
+    .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
     }
     
-    .image-frame {
-        max-width: 350px;
-        margin: 0 auto;
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .hero-actions .btn-outline {
+        margin-left: 0;
+    }
+
+    .hero-visual {
+        display: flex;
+        justify-content: center;
     }
 }
 
 @media (max-width: 768px) {
-    .nav-container {
-        padding: 0 1.5rem;
-    }
-
     .nav-menu {
         margin-left: auto;
     }
@@ -647,5 +656,33 @@ h1, h2, h3 {
 
     .btn-outline {
         margin-left: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        gap: 0.5rem;
+    }
+
+    .nav-logo img {
+        width: clamp(104px, 34vw, 152px);
+        height: auto;
+    }
+
+    .nav-menu {
+        flex-shrink: 0;
+    }
+
+    .nav-menu ul {
+        gap: 0.5rem;
+    }
+
+    .nav-link,
+    .nav-link.btn {
+        font-size: 0.875rem;
+    }
+
+    .nav-link.btn {
+        padding: 0.5rem 0.75rem;
     }
 }

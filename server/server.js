@@ -24,6 +24,10 @@ app.use(express.static(path.join(__dirname, '../public'), {
   maxAge: isProduction ? '1d' : 0, // Cache static files in production
   etag: true,
   setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html') || filePath.endsWith('.css')) {
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+
     // Set proper content types and CORS headers for local network access
     if (filePath.endsWith('.css')) {
       res.setHeader('Content-Type', 'text/css');
